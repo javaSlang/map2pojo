@@ -7,14 +7,44 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <groupId>com.javaslang.map2pojo</groupId>
     <artifactId>map2pojo</artifactId>
     <version>1.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <spring-batch.version>4.2.0.RELEASE</spring-batch.version>
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
+        <lombok.version>1.18.10</lombok.version>
+        <slf4j-api.version>2.0.0-alpha1</slf4j-api.version>
     </properties>
 
-    <!--Spring interfaces for wrappers-->
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Spring interfaces for wrappers-->
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>
@@ -25,7 +55,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>spring-jdbc</artifactId>
             <version>${spring-jdbc.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>
