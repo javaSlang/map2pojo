@@ -25,6 +25,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
         <lombok.version>1.18.10</lombok.version>
         <slf4j-api.version>2.0.0-alpha1</slf4j-api.version>
+        <junit.version>4.13-rc-1</junit.version>
     </properties>
 
     <dependencies>
@@ -54,6 +55,14 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring-jdbc.version}</version>
+        </dependency>
+
+        <!-- T E S T I N G -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
