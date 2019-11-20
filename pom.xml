@@ -21,28 +21,40 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     </build>
 
     <properties>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <lombok.version>1.18.10</lombok.version>
+        <log4j.version>2.12.1</log4j.version>
         <spring-batch.version>4.2.0.RELEASE</spring-batch.version>
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
-        <lombok.version>1.18.10</lombok.version>
-        <slf4j-api.version>2.0.0-alpha1</slf4j-api.version>
+        <junit.version>4.13-rc-1</junit.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <!--Spring interfaces for wrappers-->
         <dependency>
@@ -54,6 +66,14 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring-jdbc.version}</version>
+        </dependency>
+
+        <!-- T E S T I N G -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
