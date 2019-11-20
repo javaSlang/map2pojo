@@ -1,84 +1,48 @@
 package com.javaslang.map2pojo.core;
 
-import com.javaslang.map2pojo.core.filling.Filling;
-import com.javaslang.map2pojo.core.filling.Fillings;
-import com.javaslang.map2pojo.core.filling.Key2Field;
+import com.javaslang.map2pojo.core.filling.iface.Fillings;
+import com.javaslang.map2pojo.core.filling.impl.filling.Key2Field;
+import com.javaslang.map2pojo.core.filling.impl.fillings.DefaultFillings;
 import com.javaslang.map2pojo.core.normalization.DefaultNormalization;
 import com.javaslang.map2pojo.core.normalization.NoNormalization;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.javaslang.map2pojo.annotations.Map2Pojo.FormattedDate;
 import static com.javaslang.map2pojo.annotations.Map2Pojo.OrderedFields;
 
 @Slf4j
 public class Map2Pojo<T> {
 
-    private final Class<T> domainType;
-    private final Function<String, String> normalizationFunction;
+    private final Class<T> pojoType;
+    private final Function<String, String> normalization;
     private final Fillings fillings;
 
-    public Map2Pojo(Class<T> domainType, Function<String, String> normalizationFunction, Fillings fillings) {
-        this.domainType = domainType;
-        this.normalizationFunction = normalizationFunction;
+    public Map2Pojo(Class<T> pojoType, Function<String, String> normalization, Fillings fillings) {
+        this.pojoType = pojoType;
+        this.normalization = normalization;
         this.fillings = fillings;
     }
 
-    public Map2Pojo(Class<T> domainType, Function<String, String> normalizationFunction) {
+    public Map2Pojo(Class<T> pojoType, Function<String, String> normalization) {
         this(
-                domainType,
-                normalizationFunction,
-                new Fillings(new HashMap<Class, Filling>() {
-                    {
-                        put(
-                                Date.class, new Filling<>(
-                                        (field, rawValue) -> {
-                                            if (field.isAnnotationPresent(FormattedDate.class)) {
-                                                FormattedDate dateFormat = field.getAnnotation(FormattedDate.class);
-                                                return formattedDate((String) rawValue, dateFormat.value());
-                                            } else if (rawValue instanceof Timestamp) {
-                                                return new java.sql.Date(((Timestamp) rawValue).getTime());
-                                            } else return rawValue;
-                                        }
-                                )
-                        );
-                        put(
-                                BigDecimal.class, new Filling<>(
-                                        (field, rawValue) -> {
-                                            if (rawValue instanceof BigDecimal) {
-                                                return rawValue;
-                                            } else {
-                                                return !StringUtils.isEmpty(String.valueOf(rawValue)) ? new BigDecimal(String.valueOf(rawValue)) : null;
-                                            }
-                                        }
-                                )
-                        );
-                        put(
-                                String.class, new Filling<>(
-                                        (field, rawValue) -> StringUtils.trim((String) rawValue)
-                                )
-                        );
-                    }
-                }
-                )
+                pojoType,
+                normalization,
+                new DefaultFillings()
         );
     }
 
-    public Map2Pojo(Class<T> domainType) {
+    public Map2Pojo(Class<T> pojoType) {
         this(
-                domainType,
-                domainType.isAnnotationPresent(OrderedFields.class)
+                pojoType,
+                pojoType.isAnnotationPresent(OrderedFields.class)
                         ?
                         new NoNormalization()
                         :
@@ -88,10 +52,10 @@ public class Map2Pojo<T> {
 
     @SneakyThrows
     public T transform(Map<String, Object> originalMap) {
-        boolean isOrderedFieldType = domainType.isAnnotationPresent(OrderedFields.class);
+        boolean isOrderedFieldType = pojoType.isAnnotationPresent(OrderedFields.class);
         Map<String, Object> map2Fields = isOrderedFieldType ? originalMap : normalizedMap(originalMap);
-        Field[] declaredFields = domainType.getDeclaredFields();
-        T newDomainInstance = domainType.newInstance();
+        Field[] declaredFields = pojoType.getDeclaredFields();
+        T newPojoInstance = pojoType.newInstance();
         List<Field> fieldList = Arrays.stream(declaredFields).filter(this::onlyPrivateNonStatic).collect(Collectors.toList());
         fieldList.forEach(
                 field -> {
@@ -101,10 +65,10 @@ public class Map2Pojo<T> {
                         return;
                     }
                     fillings.appropriate(field.getType())
-                            .inject(newDomainInstance, new Key2Field(key, field), map2Fields);
+                            .inject(newPojoInstance, new Key2Field(key, field), map2Fields);
                 }
         );
-        return newDomainInstance;
+        return newPojoInstance;
     }
 
     private Map<String, Object> normalizedMap(Map<String, Object> originalMap) {
@@ -113,7 +77,7 @@ public class Map2Pojo<T> {
                 .stream()
                 .collect(
                         Collectors.toMap(
-                                normalizationFunction,
+                                normalization,
                                 originalMap::get
                         )
                 );
@@ -121,18 +85,6 @@ public class Map2Pojo<T> {
 
     private boolean onlyPrivateNonStatic(Field field) {
         return !Modifier.isStatic(field.getModifiers()) && Modifier.isPrivate(field.getModifiers());
-    }
-
-    private static Date formattedDate(String rawValue, String format) {
-        Date formattedDate = null;
-        if (rawValue != null) {
-            try {
-                formattedDate = new SimpleDateFormat(format).parse(rawValue);
-            } catch (ParseException e) {
-                log.error("Wrong date format '{}', expected '{}'", rawValue, format);
-            }
-        }
-        return formattedDate;
     }
 
 }
