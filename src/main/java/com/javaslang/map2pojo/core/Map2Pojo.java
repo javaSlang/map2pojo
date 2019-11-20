@@ -1,5 +1,7 @@
 package com.javaslang.map2pojo.core;
 
+import com.javaslang.map2pojo.core.normalization.DefaultNormalization;
+import com.javaslang.map2pojo.core.normalization.NoNormalization;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -70,7 +72,14 @@ public class Map2Pojo<T> {
     }
 
     public Map2Pojo(Class<T> domainType) {
-        this(domainType, Function.identity());
+        this(
+                domainType,
+                domainType.isAnnotationPresent(OrderedFields.class)
+                        ?
+                        new NoNormalization()
+                        :
+                        new DefaultNormalization()
+        );
     }
 
     @SneakyThrows
