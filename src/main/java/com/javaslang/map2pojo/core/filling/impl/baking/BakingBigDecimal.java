@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 public class BakingBigDecimal implements BiFunction<Field, Object, BigDecimal> {
 
@@ -15,11 +16,13 @@ public class BakingBigDecimal implements BiFunction<Field, Object, BigDecimal> {
                 ?
                 (BigDecimal) rawValue
                 :
-                !isEmpty(valueOf(rawValue))
+                rawValue != null && !isEmpty(valueOf(rawValue))
                         ?
                         new BigDecimal(
-                                valueOf(
-                                        rawValue
+                                trim(
+                                        valueOf(
+                                                rawValue
+                                        )
                                 )
                         )
                         :
