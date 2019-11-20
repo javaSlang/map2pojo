@@ -1,6 +1,7 @@
 package com.javaslang.map2pojo.core;
 
 import com.javaslang.map2pojo.core.filling.Filling;
+import com.javaslang.map2pojo.core.filling.Fillings;
 import com.javaslang.map2pojo.core.filling.Key2Field;
 import com.javaslang.map2pojo.core.normalization.DefaultNormalization;
 import com.javaslang.map2pojo.core.normalization.NoNormalization;
@@ -26,9 +27,9 @@ public class Map2Pojo<T> {
 
     private final Class<T> domainType;
     private final Function<String, String> normalizationFunction;
-    private final Map<Class, Filling> fillings;
+    private final Fillings fillings;
 
-    public Map2Pojo(Class<T> domainType, Function<String, String> normalizationFunction, Map<Class, Filling> fillings) {
+    public Map2Pojo(Class<T> domainType, Function<String, String> normalizationFunction, Fillings fillings) {
         this.domainType = domainType;
         this.normalizationFunction = normalizationFunction;
         this.fillings = fillings;
@@ -38,7 +39,7 @@ public class Map2Pojo<T> {
         this(
                 domainType,
                 normalizationFunction,
-                new HashMap<Class, Filling>() {
+                new Fillings(new HashMap<Class, Filling>() {
                     {
                         put(
                                 Date.class, new Filling<>(
@@ -70,6 +71,7 @@ public class Map2Pojo<T> {
                         );
                     }
                 }
+                )
         );
     }
 
@@ -98,12 +100,8 @@ public class Map2Pojo<T> {
                         log.info("Skipping '{}' field because normalized map does not contain expected key: '{}'", field.getName(), key);
                         return;
                     }
-                    Filling filling = fillings.get(field.getType());
-                    if (filling != null) {
-                        filling.inject(newDomainInstance, new Key2Field(key, field), map2Fields);
-                    } else {
-                        log.warn("Skipping '{}' field because there is no provided filling for '{}' type", field.getName(), field.getType());
-                    }
+                    fillings.appropriate(field.getType())
+                            .inject(newDomainInstance, new Key2Field(key, field), map2Fields);
                 }
         );
         return newDomainInstance;
