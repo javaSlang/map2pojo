@@ -1,4 +1,4 @@
-package com.javaslang.map2pojo.core;
+package com.javaslang.map2pojo.core.filling;
 
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.reflect.FieldUtils;

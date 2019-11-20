@@ -1,5 +1,7 @@
 package com.javaslang.map2pojo.core;
 
+import com.javaslang.map2pojo.core.filling.Filling;
+import com.javaslang.map2pojo.core.filling.Key2Field;
 import com.javaslang.map2pojo.core.normalization.DefaultNormalization;
 import com.javaslang.map2pojo.core.normalization.NoNormalization;
 import lombok.SneakyThrows;
