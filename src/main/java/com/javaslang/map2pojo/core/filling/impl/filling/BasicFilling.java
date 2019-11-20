@@ -1,6 +1,6 @@
 package com.javaslang.map2pojo.core.filling.impl.filling;
 
-import com.javaslang.map2pojo.core.filling.iface.Filling;
+import com.javaslang.map2pojo.core.filling.Filling;
 import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +19,8 @@ public class BasicFilling<T> implements Filling<T> {
         this.bakingFunction = bakingFunction;
     }
 
-    @SneakyThrows
     @Override
+    @SneakyThrows
     public <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet) {
         noBakingWarn(key2Field);
         FieldUtils.writeField(

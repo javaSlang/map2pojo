@@ -1,6 +1,6 @@
 package com.javaslang.map2pojo.core;
 
-import com.javaslang.map2pojo.core.filling.iface.Fillings;
+import com.javaslang.map2pojo.core.filling.Fillings;
 import com.javaslang.map2pojo.core.filling.impl.filling.Key2Field;
 import com.javaslang.map2pojo.core.filling.impl.fillings.DefaultFillings;
 import com.javaslang.map2pojo.core.normalization.DefaultNormalization;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import static com.javaslang.map2pojo.annotations.Map2Pojo.OrderedFields;
 
 @Slf4j
-public class Map2Pojo<T> {
+public class Map2Pojo<T> implements Transforming<T> {
 
     private final Class<T> pojoType;
     private final Function<String, String> normalization;
@@ -50,6 +50,7 @@ public class Map2Pojo<T> {
         );
     }
 
+    @Override
     @SneakyThrows
     public T transform(Map<String, Object> originalMap) {
         boolean isOrderedFieldType = pojoType.isAnnotationPresent(OrderedFields.class);

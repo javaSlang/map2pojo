@@ -1,4 +1,4 @@
-package com.javaslang.map2pojo.core.filling.iface;
+package com.javaslang.map2pojo.core.filling;
 
 public interface Fillings {
 
