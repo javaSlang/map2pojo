@@ -1,6 +1,7 @@
-package com.javaslang.map2pojo.core.filling;
+package com.javaslang.map2pojo.core.filling.impl.filling;
 
-import com.javaslang.map2pojo.core.filling.baking.NoBaking;
+import com.javaslang.map2pojo.core.filling.iface.Filling;
+import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -10,26 +11,28 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 @Slf4j
-public class Filling<T> {
+public class BasicFilling<T> implements Filling<T> {
 
     private final BiFunction<Field, Object, T> bakingFunction;
 
-    public Filling(BiFunction<Field, Object, T> bakingFunction) {
+    public BasicFilling(BiFunction<Field, Object, T> bakingFunction) {
         this.bakingFunction = bakingFunction;
     }
 
     @SneakyThrows
-    public <D> void inject(D newDomainInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet) {
+    @Override
+    public <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet) {
         noBakingWarn(key2Field);
         FieldUtils.writeField(
-                newDomainInstance,
+                newPojoInstance,
                 key2Field.field.getName(),
                 bakingFunction.apply(
                         key2Field.field,
                         normalizedFieldSet.get(
                                 key2Field.key
                         )
-                ), true
+                ),
+                true
         );
     }
 
