@@ -1,4 +1,4 @@
-package com.javaslang.map2pojo.core.filling.baking;
+package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import lombok.extern.slf4j.Slf4j;
 

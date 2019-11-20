@@ -1,4 +1,4 @@
-package com.javaslang.map2pojo.core.filling;
+package com.javaslang.map2pojo.core.filling.impl.filling;
 
 import java.lang.reflect.Field;
 
