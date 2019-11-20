@@ -1,6 +1,6 @@
 package com.javaslang.map2pojo.wrappers.spring.jdbc;
 
-import com.javaslang.map2pojo.core.Map2Pojo;
+import com.javaslang.map2pojo.core.Transforming;
 import lombok.SneakyThrows;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
@@ -12,15 +12,15 @@ import java.util.Map;
 
 public class ResultSet2Pojo<T> implements RowMapper<T> {
 
-    private final Map2Pojo<T> map2Pojo;
+    private final Transforming<T> transforming;
 
-    public ResultSet2Pojo(Map2Pojo<T> map2Pojo) {
-        this.map2Pojo = map2Pojo;
+    public ResultSet2Pojo(Transforming<T> transforming) {
+        this.transforming = transforming;
     }
 
     @Override
     public T mapRow(@NonNull ResultSet resultSet, int i) {
-        return map2Pojo.transform(
+        return transforming.transform(
                 resultSet2Map(
                         resultSet
                 )

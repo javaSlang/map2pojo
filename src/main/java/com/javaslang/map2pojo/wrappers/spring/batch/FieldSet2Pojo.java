@@ -1,6 +1,6 @@
 package com.javaslang.map2pojo.wrappers.spring.batch;
 
-import com.javaslang.map2pojo.core.Map2Pojo;
+import com.javaslang.map2pojo.core.Transforming;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.lang.NonNull;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 public class FieldSet2Pojo<T> implements FieldSetMapper<T> {
 
-    private final Map2Pojo<T> map2Pojo;
+    private final Transforming<T> transforming;
 
-    public FieldSet2Pojo(Map2Pojo<T> map2Pojo) {
-        this.map2Pojo = map2Pojo;
+    public FieldSet2Pojo(Transforming<T> transforming) {
+        this.transforming = transforming;
     }
 
     @Override
@@ -23,11 +23,11 @@ public class FieldSet2Pojo<T> implements FieldSetMapper<T> {
     public T mapFieldSet(FieldSet fieldSet) {
         return fieldSet.hasNames()
                 ?
-                map2Pojo.transform(
+                transforming.transform(
                         properties2Map(fieldSet.getProperties())
                 )
                 :
-                map2Pojo.transform(
+                transforming.transform(
                         values2Map(fieldSet.getValues())
                 );
     }
