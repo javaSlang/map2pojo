@@ -32,7 +32,7 @@ public class FieldSet2Pojo<T> implements FieldSetMapper<T> {
                 );
     }
 
-    private Map<String, Object> properties2Map(Properties properties) {
+    Map<String, Object> properties2Map(Properties properties) {
         return properties
                 .keySet()
                 .stream()
@@ -44,7 +44,7 @@ public class FieldSet2Pojo<T> implements FieldSetMapper<T> {
                 );
     }
 
-    private Map<String, Object> values2Map(String[] values) {
+    Map<String, Object> values2Map(String[] values) {
         Map<String, Object> mapByIndex = new HashMap<>();
         for (int i = 0; i < values.length; i++) {
             mapByIndex.put(String.valueOf(i), values[i]);
