@@ -13,7 +13,7 @@ import java.util.function.BiFunction;
 @Slf4j
 public class BasicFilling<T> implements Filling<T> {
 
-    private final BiFunction<Field, Object, T> bakingFunction;
+    final BiFunction<Field, Object, T> bakingFunction;
 
     public BasicFilling(BiFunction<Field, Object, T> bakingFunction) {
         this.bakingFunction = bakingFunction;
@@ -22,23 +22,27 @@ public class BasicFilling<T> implements Filling<T> {
     @Override
     @SneakyThrows
     public <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet) {
-        noBakingWarn(key2Field);
-        FieldUtils.writeField(
-                newPojoInstance,
-                key2Field.field.getName(),
-                bakingFunction.apply(
-                        key2Field.field,
-                        normalizedFieldSet.get(
-                                key2Field.key
-                        )
-                ),
-                true
-        );
+        if (!isNoBaking(key2Field)) {
+            FieldUtils.writeField(
+                    newPojoInstance,
+                    key2Field.field.getName(),
+                    bakingFunction.apply(
+                            key2Field.field,
+                            normalizedFieldSet.get(
+                                    key2Field.key
+                            )
+                    ),
+                    true
+            );
+        }
     }
 
-    private void noBakingWarn(Key2Field key2Field) {
+    boolean isNoBaking(Key2Field key2Field) {
         if (bakingFunction instanceof NoBaking) {
             log.warn("Skipping '{}' field because there is no provided filling for '{}' type", key2Field.field.getName(), key2Field.field.getType());
+            return true;
+        } else {
+            return false;
         }
     }
 
