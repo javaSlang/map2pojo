@@ -27,6 +27,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <spring-batch.version>4.2.0.RELEASE</spring-batch.version>
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
         <junit.version>4.13-rc-1</junit.version>
+        <mockito-all.version>2.0.2-beta</mockito-all.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito-all.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
