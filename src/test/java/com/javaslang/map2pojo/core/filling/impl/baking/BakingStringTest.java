@@ -2,8 +2,8 @@ package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import org.junit.Test;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.TestClass.TEST_CLASS_FIELDS;
-import static com.javaslang.map2pojo.core.filling.impl.baking.TestClass.TEST_FIELD;
+import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;
+import static com.javaslang.map2pojo.TestPojoClass.TEST_FIELD;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 

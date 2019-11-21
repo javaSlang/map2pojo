@@ -5,20 +5,21 @@ import org.junit.Test;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.TestClass.*;
+import static com.javaslang.map2pojo.TestPojoClass.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 public class BakingDateTest {
 
     private static final long TIME_01_01_2000 = 946681200000L;
-    private static final Date EXPECTED = new java.sql.Date(TIME_01_01_2000);
+    public static final Date EXPECTED = new java.sql.Date(TIME_01_01_2000);
+    public static final String STRING_FOR_01_01_2000 = "01-01-2000";
 
     @Test
     public void applyBasicTest() {
         Date testValue = new BakingDate().apply(
                 TEST_CLASS_FIELDS.get(ANNOTATED_TEST_DATE_FIELD), // passing annotated field
-                "01-01-2000"
+                STRING_FOR_01_01_2000
         );
         assertEquals(EXPECTED, testValue);
     }
