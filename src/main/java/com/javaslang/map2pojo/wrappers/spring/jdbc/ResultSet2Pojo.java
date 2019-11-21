@@ -28,7 +28,7 @@ public class ResultSet2Pojo<T> implements RowMapper<T> {
     }
 
     @SneakyThrows
-    private Map<String, Object> resultSet2Map(ResultSet rs) {
+    Map<String, Object> resultSet2Map(ResultSet rs) {
         ResultSetMetaData md = rs.getMetaData();
         int columns = md.getColumnCount();
         Map<String, Object> row = new HashMap<>(columns);
