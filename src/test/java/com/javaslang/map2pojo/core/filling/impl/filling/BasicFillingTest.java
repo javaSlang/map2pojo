@@ -11,6 +11,7 @@ import java.util.HashMap;
 import static com.javaslang.map2pojo.TestPojoClass.*;
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.EXPECTED;
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.*;
 
@@ -20,7 +21,7 @@ public class BasicFillingTest {
     public void noBakingWarnTest() {
         NoBaking<Object> spiedBakingFunction = spy(new NoBaking<>());
         BasicFilling<Object> spiedBasicFilling = spy(new BasicFilling<>(spiedBakingFunction));
-        Key2Field key2Field = new Key2Field("test", TEST_CLASS_FIELDS.get(TEST_FIELD));
+        Key2Field key2Field = new Key2Field(TEST, TEST_CLASS_FIELDS.get(TEST_FIELD));
         spiedBasicFilling.inject(new Object(), key2Field, new HashMap<>());
         verify(spiedBasicFilling, times(1)).isNoBaking(key2Field);
         assertTrue(spiedBasicFilling.isNoBaking(key2Field));
