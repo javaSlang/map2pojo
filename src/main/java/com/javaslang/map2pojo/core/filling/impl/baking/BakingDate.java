@@ -1,6 +1,7 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.function.BiFunction;
 
 @Slf4j
+@EqualsAndHashCode
 public class BakingDate implements BiFunction<Field, Object, Date> {
 
     @Override
