@@ -2,6 +2,7 @@ package com.javaslang.map2pojo.core.filling.impl.filling;
 
 import com.javaslang.map2pojo.core.filling.Filling;
 import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
+import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 @Slf4j
+@EqualsAndHashCode
 public class BasicFilling<T> implements Filling<T> {
 
     final BiFunction<Field, Object, T> bakingFunction;

@@ -8,10 +8,12 @@ import static junit.framework.TestCase.assertEquals;
 
 public class Key2FieldTest {
 
+    public static final String TEST = "test";
+
     @Test
     public void createAndDefaultAccessKey2FieldTest() {
-        Key2Field key2Field = new Key2Field("test", TEST_CLASS_FIELDS.get(TEST_FIELD));
-        assertEquals("test", key2Field.key);
+        Key2Field key2Field = new Key2Field(TEST, TEST_CLASS_FIELDS.get(TEST_FIELD));
+        assertEquals(TEST, key2Field.key);
         assertEquals(TEST_CLASS_FIELDS.get(TEST_FIELD), key2Field.field);
     }
 

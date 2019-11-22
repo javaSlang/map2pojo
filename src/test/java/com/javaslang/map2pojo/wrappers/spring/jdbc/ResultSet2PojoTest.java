@@ -10,9 +10,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
+import static com.javaslang.map2pojo.wrappers.spring.batch.FieldSet2PojoTest.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -42,16 +42,10 @@ public class ResultSet2PojoTest {
     public void testResultSet2Map() throws SQLException {
         when(resultSet.getMetaData()).thenReturn(resultSetMetaData);
         when(resultSetMetaData.getColumnCount()).thenReturn(1);
-        when(resultSetMetaData.getColumnName(1)).thenReturn("key");
-        when(resultSet.getObject(1)).thenReturn("value");
+        when(resultSetMetaData.getColumnName(1)).thenReturn(KEY);
+        when(resultSet.getObject(1)).thenReturn(VALUE);
         Map<String, Object> actualMap = resultSet2Pojo.resultSet2Map(resultSet);
-        assertEquals(
-                new HashMap<String, Object>() {
-                    {
-                        put("key", "value");
-                    }
-                },
-                actualMap);
+        assertEquals(EXPECTED_MAP, actualMap);
         verify(resultSet, times(1)).getObject(anyInt());
         verify(resultSetMetaData, times(1)).getColumnCount();
         verify(resultSetMetaData, times(1)).getColumnName(anyInt());

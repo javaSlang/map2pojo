@@ -12,18 +12,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FieldSet2PojoTest {
 
+    public static final String KEY = "key";
+    public static final String VALUE = "value";
     private static final Properties PROPERTIES = new Properties() {
+        {
+            put(KEY, VALUE);
+        }
+    };
+    public static final HashMap<String, Object> EXPECTED_MAP = new HashMap<String, Object>() {
         {
             put("key", "value");
         }
     };
-    private static final String[] VALUES = {"test"};
+    private static final String[] VALUES = {TEST};
 
     @Mock
     private Transforming<Object> transforming;
@@ -57,11 +65,7 @@ public class FieldSet2PojoTest {
     public void testProperties2Map() {
         Map<String, Object> actualMap = fieldSet2Pojo.properties2Map(PROPERTIES);
         assertEquals(
-                new HashMap<String, Object>() {
-                    {
-                        put("key", "value");
-                    }
-                },
+                EXPECTED_MAP,
                 actualMap);
     }
 
@@ -71,7 +75,7 @@ public class FieldSet2PojoTest {
         assertEquals(
                 new HashMap<String, Object>() {
                     {
-                        put("0", "test");
+                        put("0", TEST);
                     }
                 },
                 actualMap);
