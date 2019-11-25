@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -76,11 +77,10 @@ public class Map2Pojo<T> implements Transforming<T> {
         return originalMap
                 .keySet()
                 .stream()
-                .collect(
-                        Collectors.toMap(
-                                normalization,
-                                originalMap::get
-                        )
+                // https://stackoverflow.com/a/24634007
+                .collect(HashMap::new,
+                        (map, key) -> map.put(normalization.apply(key), originalMap.get(key)),
+                        HashMap::putAll
                 );
     }
 
