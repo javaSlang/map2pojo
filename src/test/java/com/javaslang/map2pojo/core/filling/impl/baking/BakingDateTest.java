@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertNull;
 
 public class BakingDateTest {
 
-    private static final long TIME_01_01_2000 = 946681200000L;
+    public static final long TIME_01_01_2000 = 946681200000L;
     public static final Date EXPECTED = new java.sql.Date(TIME_01_01_2000);
     public static final String STRING_FOR_01_01_2000 = "01-01-2000";
 
