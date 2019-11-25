@@ -22,6 +22,7 @@ public final class TestPojoClass {
 
     public static final String TEST_FIELD = "testField";
     public static final String ANNOTATED_TEST_DATE_FIELD = "annotatedTestDate";
+    public static final String DATE_AS_STRING = "dateAsString";
     public static final String NOT_ANNOTATED_TEST_DATE_FIELD = "notAnnotatedTestDate";
 
     public static final String DD_MM_YYYY = "dd-MM-yyyy";
@@ -31,6 +32,8 @@ public final class TestPojoClass {
     private String testField;
     @Map2Pojo.FormattedDate(DD_MM_YYYY)
     private Date annotatedTestDate;
+    @Map2Pojo.FormattedDate(DD_MM_YYYY)
+    private String dateAsString;
     private Date notAnnotatedTestDate;
     private BigDecimal fieldToSkip;
 

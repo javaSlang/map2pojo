@@ -2,8 +2,11 @@ package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import org.junit.Test;
 
-import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;
-import static com.javaslang.map2pojo.TestPojoClass.TEST_FIELD;
+import java.util.Date;
+
+import static com.javaslang.map2pojo.TestPojoClass.*;
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.TIME_01_01_2000;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
@@ -45,6 +48,15 @@ public class BakingStringTest {
                         null
                 )
         );
+    }
+
+    @Test
+    public void dateAsStringTest() {
+        String testValue = new BakingString().apply(
+                TEST_CLASS_FIELDS.get(DATE_AS_STRING),
+                new Date(TIME_01_01_2000)
+        );
+        assertEquals(STRING_FOR_01_01_2000, testValue);
     }
 
 }
