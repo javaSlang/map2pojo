@@ -47,4 +47,17 @@ public class Map2PojoTest {
         new Map2Pojo<>(NoDefaultCtorClass.class).transform(new HashMap<>());
     }
 
+    @Test
+    // https://github.com/javaSlang/map2pojo/issues/33
+    public void originalMapContainsNullValueCaseTest() {
+        Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(TestPojoClass.class, new DefaultNormalization(), new DefaultFillings());
+        TestPojoClass transformedPojoClass = testMap2Pojo.transform(new HashMap<String, Object>() {{
+            put("TEST_FIELD", TEST);
+            put("Annotated Test Date", STRING_FOR_01_01_2000);
+            put("NOT ANNOTATED TEST DATE", null);
+        }});
+        TestPojoClass testPojoClass = new TestPojoClass(TEST, new Date(TIME_01_01_2000), null);
+        assertEquals(testPojoClass, transformedPojoClass);
+    }
+
 }
