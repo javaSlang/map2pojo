@@ -28,6 +28,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
         <junit.version>4.13-rc-1</junit.version>
         <mockito-all.version>2.0.2-beta</mockito-all.version>
+        <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
     </properties>
 
     <dependencies>
@@ -80,6 +81,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${mockito-all.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>java-hamcrest</artifactId>
+            <version>${java-hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
