@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,6 +37,14 @@ public class Map2Pojo<T> implements Transforming<T> {
         );
     }
 
+    public Map2Pojo(Class<T> pojoType, Function<String, String> normalization, Locale locale) {
+        this(
+                pojoType,
+                normalization,
+                new DefaultFillings(locale)
+        );
+    }
+
     public Map2Pojo(Class<T> pojoType) {
         this(
                 pojoType,
@@ -48,6 +53,18 @@ public class Map2Pojo<T> implements Transforming<T> {
                         new NoNormalization()
                         :
                         new DefaultNormalization()
+        );
+    }
+
+    public Map2Pojo(Class<T> pojoType, Locale locale) {
+        this(
+                pojoType,
+                pojoType.isAnnotationPresent(OrderedFields.class)
+                        ?
+                        new NoNormalization()
+                        :
+                        new DefaultNormalization(),
+                locale
         );
     }
 
