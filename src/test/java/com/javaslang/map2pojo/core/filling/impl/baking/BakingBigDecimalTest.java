@@ -4,10 +4,13 @@ import com.javaslang.map2pojo.TestPojoClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;
 import static com.javaslang.map2pojo.TestPojoClass.TEST_FIELD;
 import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.Assert.assertNull;
 
 public class BakingBigDecimalTest {
@@ -57,6 +60,15 @@ public class BakingBigDecimalTest {
                         null
                 )
         );
+    }
+
+    @Test
+    public void localeCaseTest() {
+        BigDecimal testValue = new BakingBigDecimal(Locale.GERMAN).apply(
+                TEST_CLASS_FIELDS.get(TestPojoClass.TEST_FIELD),
+                "100,000000"
+        );
+        assertThat(EXPECTED, comparesEqualTo(testValue));
     }
 
 }
