@@ -9,12 +9,19 @@ import com.javaslang.map2pojo.core.filling.impl.filling.BasicFilling;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.NO_LOCALE;
 
 public class DefaultFillings extends BasicFillings {
 
     public DefaultFillings() {
-        super(init());
+        super(init(NO_LOCALE));
+    }
+
+    public DefaultFillings(Locale locale) {
+        super(init(locale));
     }
 
     @Override
@@ -22,7 +29,7 @@ public class DefaultFillings extends BasicFillings {
         return super.appropriate(tClass);
     }
 
-    private static Map<Class, Filling> init() {
+    private static Map<Class, Filling> init(Locale locale) {
         return new HashMap<Class, Filling>() {
             {
                 put(
@@ -34,7 +41,12 @@ public class DefaultFillings extends BasicFillings {
                 put(
                         BigDecimal.class,
                         new BasicFilling<>(
-                                new BakingBigDecimal()
+                                NO_LOCALE.equals(locale)
+                                        ?
+                                        new BakingBigDecimal()
+                                        :
+                                        new BakingBigDecimal(locale)
+
                         )
                 );
                 put(
