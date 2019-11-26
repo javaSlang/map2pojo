@@ -4,6 +4,7 @@ package com.javaslang.map2pojo;
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
@@ -54,6 +55,7 @@ public final class TestPojoClass {
     @Map2Pojo.OrderedFields
     @NoArgsConstructor
     @EqualsAndHashCode
+    @Getter
     public static class OrderedTestPojo {
 
         private String firstField;
