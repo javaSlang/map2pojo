@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.TIME_01_01_2000;
@@ -23,6 +24,7 @@ public class Map2PojoTest {
 
     @Test
     public void generalCaseTest() {
+        System.out.println(">>>>>>> " + new Date(TIME_01_01_2000) + " <<<<<<<<<<" + TimeZone.getDefault());
         Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(TestPojoClass.class, new DefaultNormalization(), new DefaultFillings());
         TestPojoClass transformedPojoClass = testMap2Pojo.transform(new HashMap<String, Object>() {{
             put("TEST_FIELD", TEST);
