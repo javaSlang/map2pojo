@@ -73,9 +73,8 @@ public class Map2Pojo<T> implements Transforming<T> {
     public T transform(Map<String, Object> originalMap) {
         boolean isOrderedFieldType = pojoType.isAnnotationPresent(OrderedFields.class);
         Map<String, Object> map2Fields = isOrderedFieldType ? originalMap : normalizedMap(originalMap);
-        Field[] declaredFields = pojoType.getDeclaredFields();
         T newPojoInstance = pojoType.newInstance();
-        List<Field> fieldList = Arrays.stream(declaredFields).filter(this::onlyPrivateNonStatic).collect(Collectors.toList());
+        List<Field> fieldList = allFields(pojoType);
         fieldList.forEach(
                 field -> {
                     String key = isOrderedFieldType ? String.valueOf(fieldList.indexOf(field)) : field.getName().toLowerCase();
@@ -88,6 +87,15 @@ public class Map2Pojo<T> implements Transforming<T> {
                 }
         );
         return newPojoInstance;
+    }
+
+    private List<Field> allFields(Class clazz) {
+        List<Field> fieldList = new ArrayList<>();
+        while (!Object.class.equals(clazz)) {
+            fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
+            clazz = clazz.getSuperclass();
+        }
+        return fieldList.stream().filter(this::onlyPrivateNonStatic).collect(Collectors.toList());
     }
 
     private Map<String, Object> normalizedMap(Map<String, Object> originalMap) {
