@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.function.BiFunction;
 
 import static org.apache.commons.lang3.StringUtils.trim;
@@ -25,13 +24,7 @@ public class BakingString implements BiFunction<Field, Object, String> {
     }
 
     private String formattedDate(Date rawValue, String format) {
-        String formattedDate = null;
-        if (rawValue != null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-            simpleDateFormat.setTimeZone(TimeZone.getDefault());
-            formattedDate = simpleDateFormat.format(rawValue);
-        }
-        return formattedDate;
+        return rawValue != null ? new SimpleDateFormat(format).format(rawValue) : null;
     }
 
 }

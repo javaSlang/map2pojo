@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.function.BiFunction;
 
 @Slf4j
@@ -22,7 +21,7 @@ public class BakingDate implements BiFunction<Field, Object, Date> {
             Map2Pojo.FormattedDate dateFormat = field.getAnnotation(Map2Pojo.FormattedDate.class);
             return formattedDate((String) rawValue, dateFormat.value());
         } else if (rawValue instanceof Timestamp) {
-            return new Date(((Timestamp) rawValue).getTime());
+            return new java.sql.Date(((Timestamp) rawValue).getTime());
         } else return (Date) rawValue;
     }
 
@@ -30,9 +29,7 @@ public class BakingDate implements BiFunction<Field, Object, Date> {
         Date formattedDate = null;
         if (rawValue != null) {
             try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-                simpleDateFormat.setTimeZone(TimeZone.getDefault());
-                formattedDate = simpleDateFormat.parse(rawValue);
+                formattedDate = new SimpleDateFormat(format).parse(rawValue);
             } catch (ParseException e) {
                 log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
             }
