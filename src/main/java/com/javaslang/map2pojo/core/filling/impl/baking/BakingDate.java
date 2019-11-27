@@ -21,7 +21,7 @@ public class BakingDate implements BiFunction<Field, Object, Date> {
             Map2Pojo.FormattedDate dateFormat = field.getAnnotation(Map2Pojo.FormattedDate.class);
             return formattedDate((String) rawValue, dateFormat.value());
         } else if (rawValue instanceof Timestamp) {
-            return new java.sql.Date(((Timestamp) rawValue).getTime());
+            return (Timestamp) rawValue;
         } else return (Date) rawValue;
     }
 

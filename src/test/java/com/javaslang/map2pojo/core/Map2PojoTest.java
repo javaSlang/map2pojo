@@ -12,8 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.TIME_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.*;
 import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,7 +28,7 @@ public class Map2PojoTest {
             put("Annotated Test Date", STRING_FOR_01_01_2000);
             put("NOT ANNOTATED TEST DATE", new Date(TIME_01_01_2000));
         }});
-        TestPojoClass testPojoClass = new TestPojoClass(TEST, new Date(TIME_01_01_2000), new Date(TIME_01_01_2000));
+        TestPojoClass testPojoClass = new TestPojoClass(TEST, EXPECTED, new Date(TIME_01_01_2000));
         assertEquals(testPojoClass, transformedPojoClass);
     }
 
@@ -41,7 +40,7 @@ public class Map2PojoTest {
             put("1", STRING_FOR_01_01_2000);
             put("2", 100);
         }});
-        OrderedTestPojo testPojoClass = new OrderedTestPojo(TEST, new Date(TIME_01_01_2000), new BigDecimal(100));
+        OrderedTestPojo testPojoClass = new OrderedTestPojo(TEST, EXPECTED, new BigDecimal(100));
         assertEquals(testPojoClass, transformedPojoClass);
     }
 
@@ -59,7 +58,7 @@ public class Map2PojoTest {
             put("Annotated Test Date", STRING_FOR_01_01_2000);
             put("NOT ANNOTATED TEST DATE", null);
         }});
-        TestPojoClass testPojoClass = new TestPojoClass(TEST, new Date(TIME_01_01_2000), null);
+        TestPojoClass testPojoClass = new TestPojoClass(TEST, EXPECTED, null);
         assertEquals(testPojoClass, transformedPojoClass);
     }
 
