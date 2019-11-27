@@ -1,8 +1,10 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
+import lombok.SneakyThrows;
 import org.junit.Test;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.javaslang.map2pojo.TestPojoClass.*;
@@ -11,8 +13,8 @@ import static junit.framework.TestCase.assertNull;
 
 public class BakingDateTest {
 
-    public static final long TIME_01_01_2000 = 946681200000L;
-    public static final Date EXPECTED = new java.sql.Date(TIME_01_01_2000);
+    public static final long TIME_01_01_2000 = 946684800000L;
+    public static final Date EXPECTED = expectedDate();
     public static final String STRING_FOR_01_01_2000 = "01-01-2000";
 
     @Test
@@ -21,7 +23,7 @@ public class BakingDateTest {
                 TEST_CLASS_FIELDS.get(ANNOTATED_TEST_DATE_FIELD), // passing annotated field
                 STRING_FOR_01_01_2000
         );
-        assertEquals(EXPECTED, testValue);
+        assertEquals(EXPECTED.getTime(), testValue.getTime());
     }
 
     @Test
@@ -49,7 +51,7 @@ public class BakingDateTest {
                 TEST_CLASS_FIELDS.get(NOT_ANNOTATED_TEST_DATE_FIELD),
                 new Timestamp(TIME_01_01_2000)
         );
-        assertEquals(EXPECTED, testValue);
+        assertEquals(new Timestamp(TIME_01_01_2000), testValue);
     }
 
     @Test(expected = ClassCastException.class)
@@ -85,6 +87,11 @@ public class BakingDateTest {
                 EXPECTED
         );
         assertEquals(EXPECTED, testValue);
+    }
+
+    @SneakyThrows
+    private static Date expectedDate() {
+        return new SimpleDateFormat(DD_MM_YYYY).parse(STRING_FOR_01_01_2000);
     }
 
 }
