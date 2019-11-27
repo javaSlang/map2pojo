@@ -4,6 +4,7 @@ package com.javaslang.map2pojo;
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
@@ -12,7 +13,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -53,9 +53,9 @@ public final class TestPojoClass {
     }
 
     @Map2Pojo.OrderedFields
-//    @NoArgsConstructor
-//    @EqualsAndHashCode
-//    @Getter
+    @NoArgsConstructor
+    @EqualsAndHashCode
+    @Getter
     public static class OrderedTestPojo {
 
         private String firstField;
@@ -63,52 +63,10 @@ public final class TestPojoClass {
         private Date secondField;
         private BigDecimal thirdField;
 
-        public OrderedTestPojo() {
-        }
-
         public OrderedTestPojo(String firstField, Date secondField, BigDecimal thirdField) {
             this.firstField = firstField;
             this.secondField = secondField;
             this.thirdField = thirdField;
-        }
-
-        public String getFirstField() {
-            return firstField;
-        }
-
-        public void setFirstField(String firstField) {
-            this.firstField = firstField;
-        }
-
-        public Date getSecondField() {
-            return secondField;
-        }
-
-        public void setSecondField(Date secondField) {
-            this.secondField = secondField;
-        }
-
-        public BigDecimal getThirdField() {
-            return thirdField;
-        }
-
-        public void setThirdField(BigDecimal thirdField) {
-            this.thirdField = thirdField;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            OrderedTestPojo that = (OrderedTestPojo) o;
-            return Objects.equals(firstField, that.firstField) &&
-                    Objects.equals(secondField, that.secondField) &&
-                    Objects.equals(thirdField, that.thirdField);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(firstField, secondField, thirdField);
         }
     }
 
