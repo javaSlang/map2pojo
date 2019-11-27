@@ -31,7 +31,7 @@ public class BakingDate implements BiFunction<Field, Object, Date> {
             try {
                 formattedDate = new SimpleDateFormat(format).parse(rawValue);
             } catch (ParseException e) {
-                log.error("Wrong date format '{}', expected '{}'", rawValue, format);
+                log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
             }
         }
         return formattedDate;
