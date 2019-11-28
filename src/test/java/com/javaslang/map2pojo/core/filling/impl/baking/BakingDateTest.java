@@ -1,5 +1,6 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
+import com.javaslang.map2pojo.core.filling.impl.baking.exceptions.WrongTypeMappingException;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
@@ -54,7 +55,7 @@ public class BakingDateTest {
         assertEquals(new Timestamp(TIME_01_01_2000), testValue);
     }
 
-    @Test(expected = ClassCastException.class)
+    @Test(expected = WrongTypeMappingException.class)
     public void nonDateValueTestForNotAnnotatedField() {
         new BakingDate().apply(
                 TEST_CLASS_FIELDS.get(NOT_ANNOTATED_TEST_DATE_FIELD),
@@ -67,16 +68,6 @@ public class BakingDateTest {
         new BakingDate().apply(
                 TEST_CLASS_FIELDS.get(ANNOTATED_TEST_DATE_FIELD),
                 new Object()
-        );
-    }
-
-    @Test
-    public void nullValueTest() {
-        assertNull(
-                new BakingDate().apply(
-                        TEST_CLASS_FIELDS.get(NOT_ANNOTATED_TEST_DATE_FIELD),
-                        null
-                )
         );
     }
 
