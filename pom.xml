@@ -50,7 +50,22 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <maven-compiler-plugin.source>8</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>8</maven-compiler-plugin.target>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     </properties>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <pluginManagement>
@@ -91,6 +106,60 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!--Javadoc and Sources Attachments-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--GPG Signed Components-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven-gpg-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--Nexus Staging Maven Plugin-->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${nexus-staging-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
