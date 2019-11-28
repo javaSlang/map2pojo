@@ -1,14 +1,14 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
+import com.javaslang.map2pojo.core.filling.BakingFunction;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
-import java.util.function.BiFunction;
 
 @Slf4j
 @EqualsAndHashCode
-public class NoBaking<T> implements BiFunction<Field, Object, T> {
+public class NoBaking<T> implements BakingFunction<T> {
 
     @Override
     public T apply(Field field, Object o) {
