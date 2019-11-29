@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.NO_LOCALE;
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.StringToBigDecimalConversion.NO_LOCALE;
 
 public class DefaultFillings extends BasicFillings {
 

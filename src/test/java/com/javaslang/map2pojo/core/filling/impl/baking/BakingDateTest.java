@@ -63,7 +63,7 @@ public class BakingDateTest {
         );
     }
 
-    @Test(expected = ClassCastException.class)
+    @Test(expected = WrongTypeMappingException.class)
     public void nonDateValueTestForAnnotatedField() {
         new BakingDate().apply(
                 TEST_CLASS_FIELDS.get(ANNOTATED_TEST_DATE_FIELD),
