@@ -6,9 +6,10 @@ import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.util.Map;
+
+import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 
 @Slf4j
 @EqualsAndHashCode
@@ -21,21 +22,33 @@ public class BasicFilling<T> implements Filling<T> {
     }
 
     @Override
-    @SneakyThrows
     public <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet) {
-        if (!isNoBaking(key2Field)) {
-            FieldUtils.writeField(
-                    newPojoInstance,
-                    key2Field.field.getName(),
-                    bakingFunction.bake(
-                            key2Field.field,
-                            normalizedFieldSet.get(
-                                    key2Field.key
-                            )
-                    ),
-                    true
-            );
+        if (isNoBaking(key2Field)) {
+            return;
         }
+        checkValueAndWriteField(
+                newPojoInstance,
+                key2Field,
+                bakingFunction.bake(
+                        key2Field.field,
+                        normalizedFieldSet.get(
+                                key2Field.key
+                        )
+                )
+        );
+    }
+
+    @SneakyThrows
+    private <D> void checkValueAndWriteField(D newPojoInstance, Key2Field key2Field, T bakedValue) {
+        if (bakedValue == null) {
+            return;
+        }
+        writeField(
+                newPojoInstance,
+                key2Field.field.getName(),
+                bakedValue,
+                true
+        );
     }
 
     boolean isNoBaking(Key2Field key2Field) {
