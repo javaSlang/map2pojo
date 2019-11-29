@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.NO_LOCALE;
+import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.StringToBigDecimalConversion.NO_LOCALE;
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.*;
 import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.assertEquals;
