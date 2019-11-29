@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;
 import static com.javaslang.map2pojo.TestPojoClass.TEST_FIELD;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertNull;
 
 public class BakingFunctionTest {
@@ -12,6 +13,12 @@ public class BakingFunctionTest {
     public void testNullValue() {
         BakingFunction<Object> bakingFunction = (field, o) -> new Object();
         assertNull(bakingFunction.bake(TEST_CLASS_FIELDS.get(TEST_FIELD), null));
+    }
+
+    @Test
+    public void testEmptyString() {
+        BakingFunction<Object> bakingFunction = (field, o) -> new Object();
+        assertNull(bakingFunction.bake(TEST_CLASS_FIELDS.get(TEST_FIELD), EMPTY));
     }
 
 }
