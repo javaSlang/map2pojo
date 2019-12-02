@@ -19,12 +19,19 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         </license>
     </licenses>
 
+    <organization>
+        <name>${developer.name}</name>
+        <url>${github.url}</url>
+    </organization>
+
+    <inceptionYear>${project.inceptionYear}</inceptionYear>
+
     <developers>
         <developer>
-            <name>Serhii Lanh</name>
+            <name>${developer.name}</name>
             <email>serhiylang@gmail.com</email>
             <organization>javaSlang</organization>
-            <organizationUrl>http://github.com/javaSlang</organizationUrl>
+            <organizationUrl>${github.url}</organizationUrl>
         </developer>
     </developers>
 
@@ -36,6 +43,10 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     </scm>
 
     <properties>
+        <developer.name>Serhii Lanh</developer.name>
+        <github.url>http://github.com/javaSlang</github.url>
+        <license.licenseName>mit</license.licenseName>
+        <project.inceptionYear>2019</project.inceptionYear>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-lang3.version>3.9</commons-lang3.version>
         <lombok.version>1.18.10</lombok.version>
@@ -54,6 +65,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <license-maven-plugin.version>1.9</license-maven-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -159,6 +171,18 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-maven-plugin.version}</version>
+                <configuration>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                    <processStartTag>========================LICENSE_START=================================
+                    </processStartTag>
+                    <processEndTag>=========================LICENSE_END==================================
+                    </processEndTag>
                 </configuration>
             </plugin>
         </plugins>
