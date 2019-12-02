@@ -18,4 +18,10 @@ public @interface Map2Pojo {
         String value();
     }
 
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.TYPE, ElementType.FIELD})
+    @interface Locale {
+        String value();
+    }
+
 }

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Locale;
 
 import static com.javaslang.map2pojo.core.filling.impl.fillings.BasicFillingsTest.BASIC_FILLING_WITH_DATE_BAKING;
 import static com.javaslang.map2pojo.core.filling.impl.fillings.BasicFillingsTest.BASIC_FILLING_WITH_NO_BAKING;
@@ -42,10 +41,10 @@ public class DefaultFillingsTest {
 
     @Test
     public void defaultFillingsWithLocaleTest() {
-        DefaultFillings defaultFillings = new DefaultFillings(Locale.GERMAN);
+        DefaultFillings defaultFillings = new DefaultFillings();
         assertEquals(
                 new BasicFilling<>(
-                        new BakingBigDecimal(Locale.GERMAN)
+                        new BakingBigDecimal()
                 ),
                 defaultFillings.appropriate(BigDecimal.class)
         );

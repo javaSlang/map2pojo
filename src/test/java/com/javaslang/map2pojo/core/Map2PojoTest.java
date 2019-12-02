@@ -10,9 +10,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal.StringToBigDecimalConversion.NO_LOCALE;
 import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.*;
 import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.assertEquals;
@@ -35,7 +33,7 @@ public class Map2PojoTest {
 
     @Test
     public void defaultsWithLocaleTest() {
-        Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(TestPojoClass.class, NO_LOCALE);
+        Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(TestPojoClass.class);
         TestPojoClass transformedPojoClass = testMap2Pojo.transform(new HashMap<String, Object>() {{
             put("TEST_FIELD", TEST);
             put("Annotated Test Date", STRING_FOR_01_01_2000);
@@ -77,7 +75,7 @@ public class Map2PojoTest {
 
     @Test
     public void localeCaseTest() {
-        Map2Pojo<OrderedTestPojo> testMap2Pojo = new Map2Pojo<>(OrderedTestPojo.class, Locale.GERMAN);
+        Map2Pojo<OrderedTestPojo> testMap2Pojo = new Map2Pojo<>(OrderedTestPojo.class);
         OrderedTestPojo transformedPojoClass = testMap2Pojo.transform(new HashMap<String, Object>() {{
             put("0", TEST);
             put("1", STRING_FOR_01_01_2000);

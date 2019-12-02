@@ -24,6 +24,7 @@ public final class TestPojoClass {
     public static final String ANNOTATED_TEST_DATE_FIELD = "annotatedTestDate";
     public static final String DATE_AS_STRING = "dateAsString";
     public static final String NOT_ANNOTATED_TEST_DATE_FIELD = "notAnnotatedTestDate";
+    public static final String FIELD_TO_SKIP = "fieldToSkip";
 
     public static final String DD_MM_YYYY = "dd-MM-yyyy";
 
@@ -35,6 +36,7 @@ public final class TestPojoClass {
     @Map2Pojo.FormattedDate(DD_MM_YYYY)
     private String dateAsString;
     private Date notAnnotatedTestDate;
+    @Map2Pojo.Locale("de")
     private BigDecimal fieldToSkip;
 
     public TestPojoClass(String testField, Date annotatedTestDate, Date notAnnotatedTestDate) {
@@ -45,13 +47,13 @@ public final class TestPojoClass {
 
     private static Map<String, Field> fieldToItsName() {
         return
-                Arrays.stream(
-                        TestPojoClass.class.getDeclaredFields()
-                ).filter(field -> !Modifier.isStatic(field.getModifiers()) && Modifier.isPrivate(field.getModifiers()))
+                Arrays.stream(TestPojoClass.class.getDeclaredFields())
+                        .filter(field -> !Modifier.isStatic(field.getModifiers()) && Modifier.isPrivate(field.getModifiers()))
                         .collect(Collectors.toMap(Field::getName, Function.identity()));
     }
 
     @Map2Pojo.OrderedFields
+    @Map2Pojo.Locale("de")
     @Data
     @NoArgsConstructor
     public static class OrderedTestPojo {
