@@ -45,6 +45,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <properties>
         <developer.name>Serhii Lanh</developer.name>
         <github.url>http://github.com/javaSlang</github.url>
+        <license.licenseName>mit</license.licenseName>
         <project.inceptionYear>2019</project.inceptionYear>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-lang3.version>3.9</commons-lang3.version>
