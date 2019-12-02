@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Locale;
 
 import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;
 import static com.javaslang.map2pojo.TestPojoClass.TEST_FIELD;
@@ -44,7 +43,7 @@ public class BakingBigDecimalTest {
                 TEST_CLASS_FIELDS.get(TEST_FIELD),
                 STRING_100
         );
-        assertEquals(EXPECTED, testValue);
+        assertThat(EXPECTED, comparesEqualTo(testValue));
     }
 
     @Test(expected = NumberFormatException.class)
@@ -61,7 +60,7 @@ public class BakingBigDecimalTest {
                 TEST_CLASS_FIELDS.get(TEST_FIELD),
                 "   100   "
         );
-        assertEquals(EXPECTED, testValue);
+        assertThat(EXPECTED, comparesEqualTo(testValue));
     }
 
     @Test(expected = WrongTypeMappingException.class)
@@ -74,8 +73,8 @@ public class BakingBigDecimalTest {
 
     @Test
     public void localeCaseTest() {
-        BigDecimal testValue = new BakingBigDecimal(Locale.GERMAN).apply(
-                TEST_CLASS_FIELDS.get(TestPojoClass.TEST_FIELD),
+        BigDecimal testValue = new BakingBigDecimal().apply(
+                TEST_CLASS_FIELDS.get(TestPojoClass.FIELD_TO_SKIP),
                 "100,000000"
         );
         assertThat(EXPECTED, comparesEqualTo(testValue));

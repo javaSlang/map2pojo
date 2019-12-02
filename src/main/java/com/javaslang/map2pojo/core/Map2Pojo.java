@@ -37,14 +37,6 @@ public class Map2Pojo<T> implements Transforming<T> {
         );
     }
 
-    public Map2Pojo(Class<T> pojoType, Function<String, String> normalization, Locale locale) {
-        this(
-                pojoType,
-                normalization,
-                new DefaultFillings(locale)
-        );
-    }
-
     public Map2Pojo(Class<T> pojoType) {
         this(
                 pojoType,
@@ -53,18 +45,6 @@ public class Map2Pojo<T> implements Transforming<T> {
                         new NoNormalization()
                         :
                         new DefaultNormalization()
-        );
-    }
-
-    public Map2Pojo(Class<T> pojoType, Locale locale) {
-        this(
-                pojoType,
-                pojoType.isAnnotationPresent(OrderedFields.class)
-                        ?
-                        new NoNormalization()
-                        :
-                        new DefaultNormalization(),
-                locale
         );
     }
 
