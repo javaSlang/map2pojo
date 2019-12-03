@@ -86,7 +86,7 @@ new HashMap<String, Object>() {{
     put("2", ...);
 }};
 ```
-
+___
 `@Map2Pojo.FormattedDate`: provides the possibility of `from` / `to` date conversion basing on the specified `format` value.
 
 Retention: `RUNTIME`.
@@ -114,7 +114,7 @@ new HashMap<String, Object>() {{
     ...
 }});
 ```
-
+___
 `@Map2Pojo.Locale`: provides the possibility of `number` value conversion basing on the `locale`.
 
 Retention: `RUNTIME`.
