@@ -51,3 +51,8 @@ Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(
 		new DefaultFillings()
 );
 ```
+`TestPojoClass.class` ‒ target POJO class
+
+`new DefaultNormalization()` ‒ basic implementation of `Function<String, String>` for keys normalization providing the correlation between keys in the map and field names in the POJO.
+
+`new DefaultFillings()` ‒ basic implementation of `Fillings` interface providing conversion of corresponding values from the original map to the POJO.
