@@ -29,7 +29,6 @@ import com.javaslang.map2pojo.core.filling.BakingFunction;
 import com.javaslang.map2pojo.core.filling.impl.baking.exceptions.WrongTypeMappingException;
 
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,17 +44,17 @@ public class CompositeBakingFunction<T> implements BakingFunction<T> {
     @Override
     public T apply(Field field, Object rawValue) {
         return conversions
-                .get(findAppropriateClassOrThrow(rawValue))
+                .get(findAppropriateClassOrThrow(field, rawValue))
                 .apply(field, rawValue);
     }
 
-    private Class findAppropriateClassOrThrow(Object rawValue) {
+    private Class findAppropriateClassOrThrow(Field field, Object rawValue) {
         for (Class clazz : parentsUpToObject(rawValue.getClass())) {
             if (conversions.containsKey(clazz)) {
                 return clazz;
             }
         }
-        throw new WrongTypeMappingException(rawValue, BigDecimal.class);
+        throw new WrongTypeMappingException(rawValue, field.getType());
     }
 
     private List<Class> parentsUpToObject(Class clazz) {
