@@ -36,7 +36,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.*;
+import static com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDateTest.*;
 import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -26,16 +26,16 @@
 package com.javaslang.map2pojo.core.filling.impl.filling;
 
 import com.javaslang.map2pojo.TestPojoClass;
-import com.javaslang.map2pojo.core.filling.impl.baking.BakingDate;
 import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
+import com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDate;
 import org.junit.Test;
 
 import java.util.Date;
 import java.util.HashMap;
 
 import static com.javaslang.map2pojo.TestPojoClass.*;
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.EXPECTED;
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDateTest.EXPECTED;
+import static com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDateTest.STRING_FOR_01_01_2000;
 import static com.javaslang.map2pojo.core.filling.impl.filling.Key2FieldTest.TEST;
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.*;
