@@ -27,11 +27,15 @@ package com.javaslang.map2pojo.core.filling.impl.fillings;
 
 import com.javaslang.map2pojo.core.filling.Filling;
 import com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal;
-import com.javaslang.map2pojo.core.filling.impl.baking.BakingDate;
 import com.javaslang.map2pojo.core.filling.impl.baking.BakingString;
+import com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDate;
+import com.javaslang.map2pojo.core.filling.impl.baking.time.BakingLocalDate;
+import com.javaslang.map2pojo.core.filling.impl.baking.time.BakingLocalDateTime;
 import com.javaslang.map2pojo.core.filling.impl.filling.BasicFilling;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +58,18 @@ public class DefaultFillings extends BasicFillings {
                         Date.class,
                         new BasicFilling<>(
                                 new BakingDate()
+                        )
+                );
+                put(
+                        LocalDate.class,
+                        new BasicFilling<>(
+                                new BakingLocalDate()
+                        )
+                );
+                put(
+                        LocalDateTime.class,
+                        new BasicFilling<>(
+                                new BakingLocalDateTime()
                         )
                 );
                 put(

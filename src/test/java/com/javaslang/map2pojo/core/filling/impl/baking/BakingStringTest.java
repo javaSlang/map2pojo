@@ -31,8 +31,8 @@ import org.junit.Test;
 import java.util.Date;
 
 import static com.javaslang.map2pojo.TestPojoClass.*;
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.STRING_FOR_01_01_2000;
-import static com.javaslang.map2pojo.core.filling.impl.baking.BakingDateTest.TIME_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDateTest.STRING_FOR_01_01_2000;
+import static com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDateTest.TIME_01_01_2000;
 import static junit.framework.TestCase.assertEquals;
 
 public class BakingStringTest {

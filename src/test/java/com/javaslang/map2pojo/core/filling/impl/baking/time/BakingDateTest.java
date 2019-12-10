@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling.impl.baking;
+package com.javaslang.map2pojo.core.filling.impl.baking.time;
 
 import com.javaslang.map2pojo.core.filling.impl.baking.exceptions.WrongTypeMappingException;
 import lombok.SneakyThrows;

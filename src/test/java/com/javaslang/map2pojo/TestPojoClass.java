@@ -34,6 +34,8 @@ import lombok.NoArgsConstructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -50,8 +52,11 @@ public final class TestPojoClass {
     public static final String DATE_AS_STRING = "dateAsString";
     public static final String NOT_ANNOTATED_TEST_DATE_FIELD = "notAnnotatedTestDate";
     public static final String FIELD_TO_SKIP = "fieldToSkip";
+    public static final String TEST_LOCAL_DATE = "testLocalDate";
+    public static final String TEST_LOCAL_DATE_TIME = "testLocalDateTime";
 
     public static final String DD_MM_YYYY = "dd-MM-yyyy";
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd-HH.mm.ss";
 
     public static final Map<String, Field> TEST_CLASS_FIELDS = fieldToItsName();
 
@@ -63,6 +68,11 @@ public final class TestPojoClass {
     private Date notAnnotatedTestDate;
     @Map2Pojo.Locale("de")
     private BigDecimal fieldToSkip;
+
+    @Map2Pojo.FormattedDate(DD_MM_YYYY)
+    private LocalDate testLocalDate;
+    @Map2Pojo.FormattedDate(YYYY_MM_DD_HH_MM_SS)
+    private LocalDateTime testLocalDateTime;
 
     public TestPojoClass(String testField, Date annotatedTestDate, Date notAnnotatedTestDate) {
         this.testField = testField;

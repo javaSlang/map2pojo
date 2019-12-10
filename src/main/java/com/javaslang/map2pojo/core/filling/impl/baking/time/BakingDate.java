@@ -23,10 +23,11 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling.impl.baking;
+package com.javaslang.map2pojo.core.filling.impl.baking.time;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,12 +62,10 @@ public class BakingDate extends CompositeBakingFunction<Date> {
 
         private Date formattedDate(String rawValue, String format) {
             Date formattedDate = null;
-            if (rawValue != null) {
-                try {
-                    formattedDate = new SimpleDateFormat(format).parse(rawValue);
-                } catch (ParseException e) {
-                    log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
-                }
+            try {
+                formattedDate = new SimpleDateFormat(format).parse(rawValue);
+            } catch (ParseException e) {
+                log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
             }
             return formattedDate;
         }
