@@ -33,7 +33,7 @@ public class SimplePojo {
 ```java
 Map<String, Object> hashMap = new HashMap<String, Object>() {{
 	put("FIRST_NAME", "John");
-	put(" height_", "184,52");
+	put(" height_", "184.52");
 }};
 SimplePojo pojo = new Map2Pojo<>(SimplePojo.class).transform(hashMap);
 ```
@@ -112,7 +112,7 @@ new HashMap<String, Object>() {{
     put("Annotated Test Date", ...);
     put("DATE_AS_STRING", ...);
     ...
-}});
+}};
 ```
 ___
 `@Map2Pojo.Locale`: provides the possibility of `number` value conversion basing on the `locale`.
