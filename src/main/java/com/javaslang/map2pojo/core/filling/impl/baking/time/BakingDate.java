@@ -62,12 +62,10 @@ public class BakingDate extends CompositeBakingFunction<Date> {
 
         private Date formattedDate(String rawValue, String format) {
             Date formattedDate = null;
-            if (rawValue != null) {
-                try {
-                    formattedDate = new SimpleDateFormat(format).parse(rawValue);
-                } catch (ParseException e) {
-                    log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
-                }
+            try {
+                formattedDate = new SimpleDateFormat(format).parse(rawValue);
+            } catch (ParseException e) {
+                log.warn("Wrong date format '{}', expected '{}'", rawValue, format);
             }
             return formattedDate;
         }
