@@ -103,6 +103,11 @@ private Date annotatedTestDate;
 @Map2Pojo.FormattedDate("dd-MM-yyyy")
 private String dateAsString;
 ...
+@Map2Pojo.FormattedDate("dd-MM-yyyy")
+private LocalDate annotatedTestLocalDate;
+@Map2Pojo.FormattedDate("yyyy-MM-dd-HH.mm.ss")
+private LocalDateTime annotatedTestLocalDateTime;
+...
 ```
 
 Original map:
