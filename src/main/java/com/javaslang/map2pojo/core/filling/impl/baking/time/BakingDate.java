@@ -23,10 +23,11 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling.impl.baking;
+package com.javaslang.map2pojo.core.filling.impl.baking.time;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
