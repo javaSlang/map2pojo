@@ -13,7 +13,7 @@ All you need is this to get the latest version:
 <dependency>
   <groupId>com.github.javaslang.map2pojo</groupId>
   <artifactId>map2pojo</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 
