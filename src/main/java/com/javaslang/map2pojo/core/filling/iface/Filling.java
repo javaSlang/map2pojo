@@ -23,17 +23,14 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling;
+package com.javaslang.map2pojo.core.filling.iface;
 
-import java.lang.reflect.Field;
-import java.util.function.BiFunction;
+import com.javaslang.map2pojo.core.filling.impl.filling.Key2Field;
 
-import static org.springframework.util.StringUtils.isEmpty;
+import java.util.Map;
 
-public interface BakingFunction<T> extends BiFunction<Field, Object, T> {
+public interface Filling<T> {
 
-    default T bake(Field field, Object rawValue) {
-        return isEmpty(rawValue) ? null : apply(field, rawValue);
-    }
+    <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet);
 
 }

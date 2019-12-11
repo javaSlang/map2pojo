@@ -26,7 +26,8 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
-import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.iface.baking.BakingFunction;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.LocaleUtils;
@@ -34,7 +35,6 @@ import org.apache.commons.lang3.LocaleUtils;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.Locale;
 
 import static java.math.BigDecimal.valueOf;
@@ -46,14 +46,11 @@ public class BakingBigDecimal extends CompositeBakingFunction<BigDecimal> {
 
     public BakingBigDecimal() {
         super(
-                new HashMap<Class, BakingFunction<BigDecimal>>() {
-                    {
-                        put(BigDecimal.class, (field, rawValue) -> (BigDecimal) rawValue);
-                        put(BigInteger.class, (field, rawValue) -> new BigDecimal((BigInteger) rawValue));
-                        put(Number.class, (field, rawValue) -> new BigDecimal(((Number) rawValue).doubleValue()));
-                        put(String.class, (field, rawValue) -> new StringToBigDecimalConversion().apply(field, rawValue));
-                    }
-                }
+                new BasicConversions<BigDecimal>()
+                        .with(BigDecimal.class, (field, rawValue) -> rawValue)
+                        .with(BigInteger.class, (field, rawValue) -> new BigDecimal(rawValue))
+                        .with(Number.class, (field, rawValue) -> new BigDecimal(rawValue.doubleValue()))
+                        .with(String.class, (field, rawValue) -> new StringToBigDecimalConversion().apply(field, rawValue))
         );
     }
 

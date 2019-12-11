@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling;
+package com.javaslang.map2pojo.core.filling.iface;
 
 public interface Fillings {
 

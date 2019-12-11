@@ -25,6 +25,7 @@
  */
 package com.javaslang.map2pojo.core.filling;
 
+import com.javaslang.map2pojo.core.filling.iface.baking.BakingFunction;
 import org.junit.Test;
 
 import static com.javaslang.map2pojo.TestPojoClass.TEST_CLASS_FIELDS;

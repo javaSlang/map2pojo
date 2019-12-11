@@ -26,8 +26,9 @@
 package com.javaslang.map2pojo.core.filling.impl.baking.time;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
-import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.iface.baking.Conversion;
 import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +36,6 @@ import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = false)
@@ -43,21 +43,18 @@ public class BakingDate extends CompositeBakingFunction<Date> {
 
     public BakingDate() {
         super(
-                new HashMap<Class, BakingFunction<Date>>() {
-                    {
-                        put(String.class, (field, rawValue) -> new StringToDateConversion().apply(field, rawValue));
-                        put(Date.class, (field, rawValue) -> (Date) rawValue);
-                    }
-                }
+                new BasicConversions<Date>()
+                        .with(String.class, (field, rawValue) -> new StringToDateConversion().apply(field, rawValue))
+                        .with(Date.class, (field, rawValue) -> rawValue)
         );
     }
 
-    public static class StringToDateConversion implements BakingFunction<Date> {
+    public static class StringToDateConversion implements Conversion<String, Date> {
 
         @Override
-        public Date apply(Field field, Object rawValue) {
+        public Date apply(Field field, String rawValue) {
             Map2Pojo.FormattedDate dateFormat = field.getAnnotation(Map2Pojo.FormattedDate.class);
-            return formattedDate((String) rawValue, dateFormat.value());
+            return formattedDate(rawValue, dateFormat.value());
         }
 
         private Date formattedDate(String rawValue, String format) {

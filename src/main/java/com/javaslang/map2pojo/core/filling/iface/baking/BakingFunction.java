@@ -23,14 +23,16 @@
  * THE SOFTWARE.
  * =========================LICENSE_END==================================
  */
-package com.javaslang.map2pojo.core.filling;
+package com.javaslang.map2pojo.core.filling.iface.baking;
 
-import com.javaslang.map2pojo.core.filling.impl.filling.Key2Field;
+import java.lang.reflect.Field;
 
-import java.util.Map;
+import static org.springframework.util.StringUtils.isEmpty;
 
-public interface Filling<T> {
+public interface BakingFunction<T> extends Conversion<Object, T> {
 
-    <D> void inject(D newPojoInstance, Key2Field key2Field, Map<String, Object> normalizedFieldSet);
+    default T bake(Field field, Object rawValue) {
+        return isEmpty(rawValue) ? null : apply(field, rawValue);
+    }
 
 }
