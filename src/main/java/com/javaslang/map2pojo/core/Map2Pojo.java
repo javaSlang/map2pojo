@@ -25,7 +25,7 @@
  */
 package com.javaslang.map2pojo.core;
 
-import com.javaslang.map2pojo.core.filling.Fillings;
+import com.javaslang.map2pojo.core.filling.iface.Fillings;
 import com.javaslang.map2pojo.core.filling.impl.filling.Key2Field;
 import com.javaslang.map2pojo.core.filling.impl.fillings.DefaultFillings;
 import com.javaslang.map2pojo.core.normalization.DefaultNormalization;

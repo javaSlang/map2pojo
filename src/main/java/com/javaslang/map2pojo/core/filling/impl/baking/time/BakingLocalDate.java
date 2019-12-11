@@ -1,30 +1,27 @@
 package com.javaslang.map2pojo.core.filling.impl.baking.time;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
-import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.iface.baking.Conversion;
 import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.Conversions;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
-import java.util.HashMap;
 import java.util.function.BiFunction;
 
 public class BakingLocalDate extends CompositeBakingFunction<LocalDate> {
 
     public BakingLocalDate() {
         super(
-                new HashMap<Class, BakingFunction<LocalDate>>() {
-                    {
-                        put(String.class, new StringToTemporalConversion<>(LocalDate::parse));
-                        put(LocalDate.class, (field, rawValue) -> (LocalDate) rawValue);
-                    }
-                }
+                new Conversions<LocalDate>()
+                        .with(String.class, new StringToTemporalConversion<>(LocalDate::parse))
+                        .with(LocalDate.class, (field, rawValue) -> rawValue)
         );
     }
 
-    public static class StringToTemporalConversion<T extends Temporal> implements BakingFunction<T> {
+    public static class StringToTemporalConversion<T extends Temporal> implements Conversion<String, T> {
 
         private final BiFunction<CharSequence, DateTimeFormatter, T> formattingFunction;
 
@@ -33,10 +30,10 @@ public class BakingLocalDate extends CompositeBakingFunction<LocalDate> {
         }
 
         @Override
-        public T apply(Field field, Object rawValue) {
+        public T apply(Field field, String rawValue) {
             Map2Pojo.FormattedDate dateFormat = field.getAnnotation(Map2Pojo.FormattedDate.class);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.value());
-            return formattingFunction.apply((String) rawValue, formatter);
+            return formattingFunction.apply(rawValue, formatter);
         }
 
     }

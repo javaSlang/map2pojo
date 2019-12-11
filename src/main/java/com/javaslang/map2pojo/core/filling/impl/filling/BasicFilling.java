@@ -25,8 +25,8 @@
  */
 package com.javaslang.map2pojo.core.filling.impl.filling;
 
-import com.javaslang.map2pojo.core.filling.BakingFunction;
-import com.javaslang.map2pojo.core.filling.Filling;
+import com.javaslang.map2pojo.core.filling.iface.Filling;
+import com.javaslang.map2pojo.core.filling.iface.baking.BakingFunction;
 import com.javaslang.map2pojo.core.filling.impl.baking.NoBaking;
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;

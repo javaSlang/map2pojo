@@ -25,7 +25,7 @@
  */
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
-import com.javaslang.map2pojo.core.filling.BakingFunction;
+import com.javaslang.map2pojo.core.filling.iface.baking.BakingFunction;
 import com.javaslang.map2pojo.core.filling.impl.baking.exceptions.WrongTypeMappingException;
 
 import java.lang.reflect.Field;

@@ -25,7 +25,7 @@
  */
 package com.javaslang.map2pojo.core.filling.impl.fillings;
 
-import com.javaslang.map2pojo.core.filling.Filling;
+import com.javaslang.map2pojo.core.filling.iface.Filling;
 import com.javaslang.map2pojo.core.filling.impl.baking.BakingBigDecimal;
 import com.javaslang.map2pojo.core.filling.impl.baking.BakingString;
 import com.javaslang.map2pojo.core.filling.impl.baking.time.BakingDate;
