@@ -28,7 +28,7 @@ package com.javaslang.map2pojo.core.filling.impl.baking.time;
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import com.javaslang.map2pojo.core.filling.iface.baking.Conversion;
 import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
-import com.javaslang.map2pojo.core.filling.impl.baking.conversions.Conversions;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +43,7 @@ public class BakingDate extends CompositeBakingFunction<Date> {
 
     public BakingDate() {
         super(
-                new Conversions<Date>()
+                new BasicConversions<Date>()
                         .with(String.class, (field, rawValue) -> new StringToDateConversion().apply(field, rawValue))
                         .with(Date.class, (field, rawValue) -> rawValue)
         );

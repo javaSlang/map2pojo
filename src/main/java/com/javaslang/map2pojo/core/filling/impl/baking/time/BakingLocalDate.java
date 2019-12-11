@@ -3,7 +3,7 @@ package com.javaslang.map2pojo.core.filling.impl.baking.time;
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import com.javaslang.map2pojo.core.filling.iface.baking.Conversion;
 import com.javaslang.map2pojo.core.filling.impl.baking.CompositeBakingFunction;
-import com.javaslang.map2pojo.core.filling.impl.baking.conversions.Conversions;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class BakingLocalDate extends CompositeBakingFunction<LocalDate> {
 
     public BakingLocalDate() {
         super(
-                new Conversions<LocalDate>()
+                new BasicConversions<LocalDate>()
                         .with(String.class, new StringToTemporalConversion<>(LocalDate::parse))
                         .with(LocalDate.class, (field, rawValue) -> rawValue)
         );

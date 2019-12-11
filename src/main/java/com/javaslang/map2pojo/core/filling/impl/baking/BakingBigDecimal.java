@@ -27,7 +27,7 @@ package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
 import com.javaslang.map2pojo.core.filling.iface.baking.BakingFunction;
-import com.javaslang.map2pojo.core.filling.impl.baking.conversions.Conversions;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.LocaleUtils;
@@ -46,7 +46,7 @@ public class BakingBigDecimal extends CompositeBakingFunction<BigDecimal> {
 
     public BakingBigDecimal() {
         super(
-                new Conversions<BigDecimal>()
+                new BasicConversions<BigDecimal>()
                         .with(BigDecimal.class, (field, rawValue) -> rawValue)
                         .with(BigInteger.class, (field, rawValue) -> new BigDecimal(rawValue))
                         .with(Number.class, (field, rawValue) -> new BigDecimal(rawValue.doubleValue()))

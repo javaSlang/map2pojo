@@ -26,7 +26,7 @@
 package com.javaslang.map2pojo.core.filling.impl.baking;
 
 import com.javaslang.map2pojo.annotations.Map2Pojo;
-import com.javaslang.map2pojo.core.filling.impl.baking.conversions.Conversions;
+import com.javaslang.map2pojo.core.filling.impl.baking.conversions.BasicConversions;
 import lombok.EqualsAndHashCode;
 
 import java.text.SimpleDateFormat;
@@ -39,7 +39,7 @@ public class BakingString extends CompositeBakingFunction<String> {
 
     public BakingString() {
         super(
-                new Conversions<String>()
+                new BasicConversions<String>()
                         .with(String.class, (field, rawValue) -> trim(rawValue))
                         .with(Date.class, (field, rawValue) -> {
                             Map2Pojo.FormattedDate dateFormat = field.getAnnotation(Map2Pojo.FormattedDate.class);
