@@ -54,6 +54,7 @@ public final class TestPojoClass {
     public static final String FIELD_TO_SKIP = "fieldToSkip";
     public static final String TEST_LOCAL_DATE = "testLocalDate";
     public static final String TEST_LOCAL_DATE_TIME = "testLocalDateTime";
+    public static final String PROTECTED_FIELD = "protectedField";
 
     public static final String DD_MM_YYYY = "dd-MM-yyyy";
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd-HH.mm.ss";
@@ -74,10 +75,19 @@ public final class TestPojoClass {
     @Map2Pojo.FormattedDate(YYYY_MM_DD_HH_MM_SS)
     private LocalDateTime testLocalDateTime;
 
+    protected String protectedField;
+
     public TestPojoClass(String testField, Date annotatedTestDate, Date notAnnotatedTestDate) {
         this.testField = testField;
         this.annotatedTestDate = annotatedTestDate;
         this.notAnnotatedTestDate = notAnnotatedTestDate;
+    }
+
+    public TestPojoClass(String testField, Date annotatedTestDate, Date notAnnotatedTestDate, String protectedField) {
+        this.testField = testField;
+        this.annotatedTestDate = annotatedTestDate;
+        this.notAnnotatedTestDate = notAnnotatedTestDate;
+        this.protectedField = protectedField;
     }
 
     private static Map<String, Field> fieldToItsName() {

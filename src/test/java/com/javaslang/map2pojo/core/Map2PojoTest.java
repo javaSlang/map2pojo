@@ -110,4 +110,17 @@ public class Map2PojoTest {
         assertThat(testPojoClass.getThirdField(), comparesEqualTo(transformedPojoClass.getThirdField()));
     }
 
+    @Test
+    public void protectedFieldCaseTest() {
+        Map2Pojo<TestPojoClass> testMap2Pojo = new Map2Pojo<>(TestPojoClass.class, new DefaultNormalization(), new DefaultFillings());
+        TestPojoClass transformedPojoClass = testMap2Pojo.transform(new HashMap<String, Object>() {{
+            put("TEST_FIELD", TEST);
+            put("Annotated Test Date", STRING_FOR_01_01_2000);
+            put("NOT ANNOTATED TEST DATE", new Date(TIME_01_01_2000));
+            put("PROTECTED___field", TEST);
+        }});
+        TestPojoClass testPojoClass = new TestPojoClass(TEST, EXPECTED, new Date(TIME_01_01_2000), TEST);
+        assertEquals(testPojoClass, transformedPojoClass);
+    }
+
 }
