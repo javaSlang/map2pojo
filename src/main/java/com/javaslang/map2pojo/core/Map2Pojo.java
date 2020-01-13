@@ -100,7 +100,7 @@ public class Map2Pojo<T> implements Transforming<T> {
             fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
             clazz = clazz.getSuperclass();
         }
-        return fieldList.stream().filter(this::onlyPrivateNonStatic).collect(Collectors.toList());
+        return fieldList.stream().filter(this::onlyNonStatic).collect(Collectors.toList());
     }
 
     private Map<String, Object> normalizedMap(Map<String, Object> originalMap) {
@@ -114,8 +114,8 @@ public class Map2Pojo<T> implements Transforming<T> {
                 );
     }
 
-    private boolean onlyPrivateNonStatic(Field field) {
-        return !Modifier.isStatic(field.getModifiers()) && Modifier.isPrivate(field.getModifiers());
+    private boolean onlyNonStatic(Field field) {
+        return !Modifier.isStatic(field.getModifiers());
     }
 
 }
