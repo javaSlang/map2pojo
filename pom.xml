@@ -53,7 +53,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <log4j.version>2.12.1</log4j.version>
         <spring-batch.version>4.2.0.RELEASE</spring-batch.version>
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
-        <junit.version>4.13-rc-1</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito-all.version>2.0.2-beta</mockito-all.version>
         <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
