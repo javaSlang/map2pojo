@@ -50,7 +50,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-lang3.version>3.9</commons-lang3.version>
         <lombok.version>1.18.10</lombok.version>
-        <log4j.version>2.12.1</log4j.version>
+        <log4j.version>2.15.0</log4j.version>
         <spring-batch.version>4.2.0.RELEASE</spring-batch.version>
         <spring-jdbc.version>5.2.1.RELEASE</spring-jdbc.version>
         <junit.version>4.13-rc-1</junit.version>
